@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO y Configuración Oficial -->
-    <title>C24 - CORGAX24 Noticias - En Construcción</title>
-    <meta name="description" content="CORGAX24 (C24). Portal informativo de actualidad, política, economía y deportes con cobertura de alcance internacional. Próximamente.">
+    <title>C24 CORGAX24 Noticias - En Construcción</title>
+    <meta name="description" content="CORGAX24 (C24). Portal informativo de actualidad, política, economía y deportes con cobertura de alcance nacional e internacional. Próximamente.">
     <meta name="robots" content="index, follow">
     <!-- Etiqueta obligatoria para evitar que Google u otros navegadores traduzcan el sitio (mantiene autoridad) -->
     <meta name="google" content="notranslate">
@@ -271,9 +271,11 @@
                             </div>
                             
                             <!-- Implementación estructural Brevo adaptada -->
+                            <!-- SE AÑADIÓ sib-form para que el JS lo reconozca -->
                             <div class="sib-form relative z-10 w-full flex flex-col">
                                 <div id="sib-form-container" class="w-full">
                                     
+                                    <!-- Paneles de mensaje ocultos por defecto, Brevo los muestra dinámicamente -->
                                     <div id="error-message" class="sib-form-message-panel bg-[#661d1d] text-white/90 border border-red-500/50 rounded-[8px] p-[10px] mb-[10px] text-[12px] sm:text-[13px] font-medium text-center shadow-inner">
                                         <div class="flex items-center justify-center gap-2">
                                             <i class="fa-solid fa-circle-exclamation text-red-400"></i>
@@ -293,10 +295,12 @@
                                             <input type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Tu correo electrónico..." required data-required="true"
                                                    class="bg-[#F8F9FA] text-[#222222] text-[13px] sm:text-[14px] md:text-[15px] pl-[16px] pr-[105px] sm:pr-[125px] md:pr-[135px] py-[14px] sm:py-[16px] w-full rounded-[12px] outline-none placeholder-gray-500 font-bold border-2 border-transparent focus:border-black/20 shadow-inner transition-all">
                                             
+                                            <!-- SE AÑADIÓ sib-form-block__button para que el JS gestione el estado de carga -->
                                             <button type="submit" form="sib-form" class="sib-form-block__button absolute right-[4px] top-[4px] bottom-[4px] bg-[#D31224] hover:bg-[#F1321F] text-white px-[14px] sm:px-[20px] md:px-[24px] rounded-[8px] font-bold text-[11px] sm:text-[13px] md:text-[14px] transition-all flex items-center justify-center uppercase tracking-wider shadow-md border border-white/10 outline-none">
                                                 Avisarme
                                             </button>
                                         </div>
+                                        <!-- Error debajo del input, Brevo lo rellena dinámicamente -->
                                         <label class="entry__error entry__error--primary mt-[8px] text-[11px] sm:text-[12px] text-white font-bold text-center drop-shadow-md empty:hidden" for="EMAIL"></label>
                                         <input type="text" name="email_address_check" value="" class="hidden" tabindex="-1">
                                         <input type="hidden" name="locale" value="es">
@@ -455,6 +459,7 @@
         });
     </script>
 
+    <!-- Script de configuración de Brevo adaptado a español neutro -->
     <script>
         window.REQUIRED_CODE_ERROR_MESSAGE = 'Elige un código de país';
         window.LOCALE = 'es';
@@ -474,6 +479,7 @@
         };
         var AUTOHIDE = Boolean(0);
     </script>
+    <!-- Script principal de Brevo que hace que todo sea dinámico (Ajax) -->
     <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 
 </body>
