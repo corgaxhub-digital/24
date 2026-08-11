@@ -2,26 +2,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>C24 Corgac24 Noticias - En Construcción</title>
     
-    <!-- SEO y Configuración Oficial -->
-    <title>CORGAX24 Noticias - En Construcción</title>
-    <meta name="description" content="CORGAX24 (C24). Portal informativo de actualidad, política, economía y deportes con cobertura de alcance internacional. Próximamente.">
+    <!-- SEO y Metadatos Profesionales -->
+    <meta name="description" content="Portal informativo en construcción. Cobertura de alcance nacional e internacional, actualidad, economía y política.">
     <meta name="robots" content="index, follow">
-    <!-- Etiqueta obligatoria para evitar que Google u otros navegadores traduzcan el sitio (mantiene autoridad) -->
     <meta name="google" content="notranslate">
+    <link rel="canonical" href="https://corgax24.com/">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://corgax24.com/imag/logo/favicon/C24.png">
+    <!-- Favicon (El apple-touch-icon fuerza bordes redondeados al guardar en móviles) -->
+    <link rel="icon" href="https://corgax24.com/imag/logo/favicon/C24.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://corgax24.com/imag/logo/favicon/C24.png">
+    <link rel="apple-touch-icon-precomposed" href="https://corgax24.com/imag/logo/favicon/C24.png">
 
-    <!-- Espacio Preparado para Google Analytics -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=TU_ID_AQUI"></script>
+    <!-- Espacio para Google Analytics -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=TU_ID_AQUI"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'TU_ID_AQUI');
-    </script> -->
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'TU_ID_AQUI');
+    </script>
+    -->
     
     <!-- Google Fonts: Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +35,7 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
-    <!-- Tailwind CSS con Breakpoints Personalizados -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -52,6 +56,15 @@
                             red: '#D31224',
                             dark: '#A30D1A',
                         }
+                    },
+                    animation: {
+                        'fadeIn': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
                     }
                 }
             }
@@ -63,6 +76,8 @@
             background-color: #D31224;
             overflow-x: hidden;
             position: relative;
+            /* Evita que los toques en móvil resalten todo de azul */
+            -webkit-tap-highlight-color: transparent; 
         }
 
         /* --- PROTECCIÓN VISUAL ANTI-SOMBREADO (No afecta SEO) --- */
@@ -75,11 +90,13 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            pointer-events: none; /* Desactiva toques accidentales en móviles */
         }
         
         img::-moz-selection { background: transparent; color: transparent; }
         img::selection { background: transparent; color: transparent; }
 
+        /* Cinta de obra */
         .cinta-obra {
             background: repeating-linear-gradient(
                 -45deg,
@@ -97,6 +114,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
+        /* --- FONDO GEOMÉTRICO NOTICIERO --- */
         .bg-geometric {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -107,6 +125,7 @@
         .shape-2 { top: -10%; left: 10%; width: 12vw; height: 120%; background: rgba(255, 255, 255, 0.02); }
         .shape-3 { bottom: -20%; left: -15%; width: 25vw; height: 60%; background: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0%, transparent 100%); }
 
+        /* --- ESTILO TELEVISIVO DEPORTES --- */
         .sport-widget-bg {
             background-color: #F1321F; 
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
@@ -116,18 +135,14 @@
         .footer-logo {
             filter: grayscale(100%) brightness(200%) opacity(0.55);
             transition: all 0.4s ease-in-out;
+            pointer-events: auto; /* Permite clic en los logos del footer */
         }
         .footer-logo:hover {
             filter: grayscale(0%) brightness(100%) opacity(1);
             transform: scale(1.05);
         }
 
-        /* --- ESTILOS OBLIGATORIOS PARA REPARAR EL CONFLICTO DE BREVO --- */
-        /* Esto oculta los mensajes por defecto para que no se vean al cargar la página */
-        .sib-form-message-panel { display: none; } 
-        /* Esconde el ícono de carga feo que reemplaza al botón */
-        .sib-hide-loader-icon { display: none !important; }
-
+        /* --- AJUSTE RESPONSIVE FINAL --- */
         @media (max-width: 450px) {
             .cinta-obra { max-width: 280px; }
             .sport-widget-bg { padding: 14px !important; }
@@ -152,7 +167,10 @@
     </style>
 </head>
 
-<body class="text-white min-h-screen antialiased selection:bg-[#D1D5DB] selection:text-black flex flex-col">
+<body class="text-white min-h-screen antialiased selection:bg-[#D1D5DB] selection:text-black flex flex-col select-none">
+
+    <!-- Iframe invisible para envío seguro de Brevo -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
     <div class="bg-geometric">
         <div class="geom-shape shape-3"></div>
@@ -160,8 +178,10 @@
         <div class="geom-shape shape-1"></div>
     </div>
 
+    <!-- Contenido Principal -->
     <div class="max-w-[1400px] mx-auto px-[16px] sm:px-[24px] py-[8px] md:py-[16px] lg:px-[48px] relative z-10 flex flex-col flex-1 w-full">
         
+        <!-- Header con botón EN -->
         <div class="w-full flex justify-end mb-[0px]">
             <button class="border border-white/30 bg-black/10 hover:bg-white hover:text-brand-red text-white font-black px-[20px] py-[8px] sm:px-[24px] sm:py-[10px] rounded-[12px] transition-all duration-300 shadow-sm cursor-pointer backdrop-blur-md tracking-wider text-[14px] sm:text-[16px] uppercase">
                 EN
@@ -170,10 +190,11 @@
 
         <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-[28px] sm:gap-[32px] md:gap-[24px] lg:gap-[48px] mb-[32px]">
             
+            <!-- Lado Izquierdo -->
             <div class="flex-1 w-full text-center md:text-left pt-[0px] sm:pt-[4px] md:pt-[8px] lg:pt-[1px] lg:-mt-[30px]">
                 
                 <div class="flex justify-center md:justify-start relative z-20 selection:bg-transparent">
-                    <img src="https://corgax24.com/imag/logo/noticiassinfondo.png" alt="CORGAX24 Noticias" 
+                    <img src="https://corgax24.com/imag/logo/noticiassinfondo.png" alt="C24 Noticias" 
                          draggable="false" oncontextmenu="return false;"
                          class="object-contain drop-shadow-2xl select-none pointer-events-none
                          h-[224px] mt-[-32px] mb-[-30px]
@@ -183,15 +204,15 @@
                 </div>
 
                 <h1 class="font-black leading-[1.02] text-white drop-shadow-xl tracking-tight break-words relative z-10 
-                           text-[36px] sm:text-[50px] md:text-[46px] lg:text-[58px] mb-[12px]">
+                           text-[36px] sm:text-[50px] md:text-[46px] lg:text-[58px] mb-[12px] select-text">
                     ESTAMOS EN<br>CONSTRUCCIÓN
                 </h1>
 
                 <div class="cinta-obra mx-auto md:mx-0 relative z-10 mt-[16px] mb-[28px] md:mt-[30px] md:mb-[36px]"></div>
 
                 <p class="leading-relaxed text-white/90 font-medium relative z-10 max-w-[672px] mx-auto md:mx-0 
-                           text-[16px] sm:text-[18px] md:text-[15px] lg:text-[17px] mb-[24px]">
-                    Estamos desarrollando un portal informativo dedicado a la <strong class="font-bold text-white">actualidad, política, economía y sucesos de último minuto.</strong> Muy pronto tendrás acceso a cobertura continua, contexto y noticias de alcance nacional e internacional.
+                           text-[16px] sm:text-[18px] md:text-[15px] lg:text-[17px] mb-[24px] select-text">
+                    Portal informativo en desarrollo. Muy pronto daremos inicio a nuestra cobertura ininterrumpida con <strong class="font-bold text-white">actualidad, política, economía y sucesos de último minuto,</strong> con enfoque nacional e internacional.
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-[24px] sm:gap-[0px] sm:items-center text-left border-y border-white/20 sm:border-none py-[16px] sm:py-[0px] relative z-10">
@@ -199,8 +220,8 @@
                         <div class="w-[48px] h-[48px] flex-shrink-0 flex items-center justify-center border border-white/20 rounded-[12px] bg-black/20 shadow-sm backdrop-blur-sm">
                             <i class="fa-solid fa-globe text-white text-[20px] md:text-[22px]"></i>
                         </div>
-                        <p class="leading-tight font-medium text-white/80 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px]">
-                            Cobertura global en desarrollo.<br>
+                        <p class="leading-tight font-medium text-white/80 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] select-text">
+                            Cobertura global de alto impacto.<br>
                             Pronto la experiencia completa.
                         </p>
                     </div>
@@ -210,8 +231,8 @@
                             <div class="w-[48px] h-[48px] flex-shrink-0 flex items-center justify-center border border-white/20 rounded-[12px] bg-black/20 shadow-sm backdrop-blur-sm">
                                 <i class="fa-regular fa-clock text-white text-[20px] md:text-[22px]"></i>
                             </div>
-                            <p class="leading-tight font-bold tracking-wide text-white text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px]">
-                                PRÓXIMA EDICIÓN.<br>
+                            <p class="leading-tight font-bold tracking-wide text-white text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] select-text">
+                                PRÓXIMO LANZAMIENTO.<br>
                                 <span class="text-black bg-white px-[6px] py-[2px] rounded-[4px] text-[10px] sm:text-[11px] uppercase mt-[4px] inline-block">MUY PRONTO</span>
                             </p>
                         </div>
@@ -219,12 +240,13 @@
                 </div>
             </div>
 
+            <!-- Lado Derecho -->
             <div class="flex-1 w-full flex flex-col items-center pt-[16px] md:pt-[0px]">
                 
                 <div class="w-full flex items-center justify-center pointer-events-none select-none relative z-10 selection:bg-transparent">
                     <img src="https://corgax24.com/imag/elementos/iconoreferencial.png" alt="Imagen Referencial" 
                          draggable="false" oncontextmenu="return false;"
-                         class="h-auto w-full object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.4)] select-none pointer-events-none
+                         class="h-auto w-full object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.4)]
                          max-w-[520px] mt-[-4px] mb-[8px]
                          sm:max-w-[590px] sm:mt-[-4px] sm:mb-[12px]
                          md:max-w-[660px] md:mt-[0px] md:mb-[20px]
@@ -232,7 +254,7 @@
                 </div>
                 
                 <div class="w-full lg:max-w-[760px] flex flex-col items-center mt-[8px] sm:mt-[12px]">
-                    <span class="text-[11px] sm:text-[12px] md:text-[13px] font-bold tracking-widest uppercase text-white/60 mb-[8px]">Canales de Difusión</span>
+                    <span class="text-[11px] sm:text-[12px] md:text-[13px] font-bold tracking-widest uppercase text-white/60 mb-[8px]">Síguenos en</span>
                     
                     <div class="flex flex-row xs:flex-col justify-center xs:items-center gap-[8px] sm:gap-[16px] w-full px-[8px] md:px-[0px]">
                         
@@ -241,7 +263,7 @@
                                 <i class="fa-brands fa-facebook text-[#D1D5DB] group-hover:text-white text-[20px] sm:text-[22px] md:text-[24px] drop-shadow-md group-hover:scale-110 transition-transform"></i>
                             </div>
                             <div class="flex items-center text-left leading-tight font-bold text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px]">
-                                <span class="whitespace-nowrap">CORGAX24 Noticias</span>
+                                <span class="whitespace-nowrap">Corgax24 Noticias</span>
                             </div>
                         </a>
                         
@@ -250,58 +272,60 @@
                                 <i class="fa-brands fa-facebook text-[#D1D5DB] group-hover:text-white text-[20px] sm:text-[22px] md:text-[24px] drop-shadow-md group-hover:scale-110 transition-transform"></i>
                             </div>
                             <div class="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center text-left leading-tight font-bold text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px]">
-                                <span class="whitespace-nowrap sm:mr-[4px]">CORGAX24 Noticias</span>
-                                <span>Peru</span>
+                                <span class="whitespace-nowrap sm:mr-[4px]">Corgax24 Noticias</span>
+                                <span>Perú</span>
                             </div>
                         </a>
 
                     </div>
 
-                    <!-- Caja de Suscripción (Funcionalidad Brevo) -->
+                    <!-- ==========================================
+                         WIDGET DE AVISO (Estilo Glassmorphism Inalterado)
+                         ========================================== -->
                     <div class="w-full flex flex-col items-center mt-[20px] sm:mt-[24px] md:mt-[28px] px-[8px] md:px-[0px]">
-                        <div class="w-full max-w-full md:max-w-[620px] lg:max-w-[700px] bg-[#A30D1A]/60 backdrop-blur-md border border-white/20 rounded-[16px] p-[16px] sm:p-[20px] lg:p-[24px] shadow-2xl flex flex-col relative overflow-hidden">
+                        <div class="w-full max-w-full md:max-w-[620px] lg:max-w-[700px] bg-[#A30D1A]/60 backdrop-blur-md border border-white/20 rounded-[16px] p-[16px] sm:p-[20px] lg:p-[24px] shadow-2xl flex flex-col relative overflow-hidden transition-all duration-500">
                             <div class="absolute top-0 right-0 w-[120px] h-[120px] bg-white/5 rounded-full blur-2xl -mt-[40px] -mr-[40px] pointer-events-none"></div>
                             
-                            <div class="flex flex-col items-center justify-center gap-[8px] mb-[12px] text-center relative z-10">
-                                <i class="fa-regular fa-envelope text-white text-[24px] sm:text-[28px] drop-shadow-md"></i>
-                                <div class="flex flex-col">
-                                    <span class="text-[13px] sm:text-[15px] md:text-[16px] lg:text-[18px] font-black tracking-widest uppercase text-white drop-shadow-sm">Recibe Alertas</span>
-                                    <span class="text-[11px] sm:text-[12px] md:text-[13px] text-white/80 font-medium mt-[2px] text-center">Te notificaremos cuando C24 esté en línea.</span>
+                            <div id="widget-header" class="flex flex-col items-center justify-center mb-[12px] text-center relative z-10 transition-all duration-300">
+                                <div class="flex items-center justify-center gap-[8px] sm:gap-[10px] mb-[4px]">
+                                    <i class="fa-regular fa-envelope text-white text-[20px] sm:text-[24px] drop-shadow-md"></i>
+                                    <span class="text-[13px] sm:text-[15px] md:text-[16px] lg:text-[18px] font-black tracking-widest uppercase text-white drop-shadow-sm">Aviso de Lanzamiento</span>
                                 </div>
+                                <span class="text-[11px] sm:text-[12px] md:text-[13px] text-white/80 font-medium text-center max-w-[350px] mx-auto select-text">
+                                    Te notificaremos por correo en cuanto el portal esté disponible.
+                                </span>
                             </div>
                             
-                            <!-- Implementación estructural Brevo adaptada -->
-                            <!-- SE AÑADIÓ sib-form para que el JS lo reconozca -->
-                            <div class="sib-form relative z-10 w-full flex flex-col">
-                                <div id="sib-form-container" class="w-full">
-                                    
-                                    <!-- Paneles de mensaje ocultos por defecto, Brevo los muestra dinámicamente -->
-                                    <div id="error-message" class="sib-form-message-panel bg-[#661d1d] text-white/90 border border-red-500/50 rounded-[8px] p-[10px] mb-[10px] text-[12px] sm:text-[13px] font-medium text-center shadow-inner">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <i class="fa-solid fa-circle-exclamation text-red-400"></i>
-                                            <span class="sib-form-message-panel__inner-text">No hemos podido validar su solicitud. Intente nuevamente.</span>
+                            <div class="relative z-10 w-full flex flex-col min-h-[60px] justify-center">
+                                
+                                <!-- Mensaje Éxito Animado -->
+                                <div id="success-message" class="hidden w-full text-center animate-fadeIn py-1">
+                                    <div class="flex flex-col items-center justify-center gap-2">
+                                        <i class="fa-solid fa-circle-check text-white text-[32px] sm:text-[40px] drop-shadow-md"></i>
+                                        <div class="flex flex-col">
+                                            <span class="text-[14px] sm:text-[16px] text-green-400 font-extrabold tracking-wide drop-shadow-md">Confirmado</span>
+                                            <span class="text-[12px] sm:text-[13px] text-white/90 font-medium">Te avisaremos el día de la apertura.</span>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div id="success-message" class="sib-form-message-panel bg-[#085229] text-white border border-green-500/50 rounded-[8px] p-[10px] mb-[10px] text-[12px] sm:text-[13px] font-medium text-center shadow-inner">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <i class="fa-solid fa-circle-check text-green-400"></i>
-                                            <span class="sib-form-message-panel__inner-text">Suscripción confirmada. Bienvenido a CORGAX24.</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <form id="sib-form" method="POST" action="https://2506ec3f.sibforms.com/serve/MUIFAN0p44KkBtkP-vm6vhde7HcSTq5ksou_5evXrgJpGJxwinFp2M5yjkpw1M0Ep9kMS-A1J8O0J5y8BA8XNnqlp9fmjHREYtP36eXY0zHT0ERnjcIy-tzHFv7o8tInKa-2SEyAbgx_fOaBTLnCbxGBSs7-yHzA0AB3JgwRDRoR9hiAllg_71PtxXvOsYHOFg-Avp-gfCJlWxOx1w==" data-type="subscription" class="w-full flex flex-col">
+                                <!-- Formulario Brevo -->
+                                <div id="form-container" class="w-full transition-all duration-300">
+                                    <form id="sib-form" method="POST" target="hidden_iframe" action="https://2506ec3f.sibforms.com/serve/MUIFAN0p44KkBtkP-vm6vhde7HcSTq5ksou_5evXrgJpGJxwinFp2M5yjkpw1M0Ep9kMS-A1J8O0J5y8BA8XNnqlp9fmjHREYtP36eXY0zHT0ERnjcIy-tzHFv7o8tInKa-2SEyAbgx_fOaBTLnCbxGBSs7-yHzA0AB3JgwRDRoR9hiAllg_71PtxXvOsYHOFg-Avp-gfCJlWxOx1w==" data-type="subscription" class="flex flex-col w-full relative" novalidate>
                                         <div class="relative flex w-full">
-                                            <input type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Tu correo electrónico..." required data-required="true"
-                                                   class="bg-[#F8F9FA] text-[#222222] text-[13px] sm:text-[14px] md:text-[15px] pl-[16px] pr-[105px] sm:pr-[125px] md:pr-[135px] py-[14px] sm:py-[16px] w-full rounded-[12px] outline-none placeholder-gray-500 font-bold border-2 border-transparent focus:border-black/20 shadow-inner transition-all">
+                                            <input type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Tu correo electrónico..." required
+                                                   class="select-text bg-[#F8F9FA] text-[#222222] text-[13px] sm:text-[14px] md:text-[15px] pl-[16px] pr-[105px] sm:pr-[125px] md:pr-[135px] py-[14px] sm:py-[16px] w-full rounded-[12px] outline-none placeholder-gray-500 font-bold border-2 border-transparent focus:border-red-600/30 shadow-inner transition-all">
                                             
-                                            <!-- SE AÑADIÓ sib-form-block__button para que el JS gestione el estado de carga -->
-                                            <button type="submit" form="sib-form" class="sib-form-block__button absolute right-[4px] top-[4px] bottom-[4px] bg-[#D31224] hover:bg-[#F1321F] text-white px-[14px] sm:px-[20px] md:px-[24px] rounded-[8px] font-bold text-[11px] sm:text-[13px] md:text-[14px] transition-all flex items-center justify-center uppercase tracking-wider shadow-md border border-white/10 outline-none">
-                                                Avisarme
+                                            <button id="submit-btn" type="submit" class="absolute right-[4px] top-[4px] bottom-[4px] bg-[#D31224] hover:bg-[#F1321F] text-white px-[14px] sm:px-[20px] md:px-[24px] rounded-[8px] font-bold text-[11px] sm:text-[13px] md:text-[14px] transition-all flex items-center justify-center uppercase tracking-wider shadow-md border border-white/10 outline-none">
+                                                <span id="btn-text">Avisarme</span>
+                                                <svg id="btn-loader" class="hidden w-3.5 h-3.5 ml-1.5 animate-spin" viewBox="0 0 512 512" fill="currentColor">
+                                                    <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+                                                </svg>
                                             </button>
                                         </div>
-                                        <!-- Error debajo del input, Brevo lo rellena dinámicamente -->
-                                        <label class="entry__error entry__error--primary mt-[8px] text-[11px] sm:text-[12px] text-white font-bold text-center drop-shadow-md empty:hidden" for="EMAIL"></label>
+                                        <p id="error-alert" class="hidden mt-[8px] text-[11px] sm:text-[12px] text-[#ffcccc] font-semibold text-center drop-shadow-md">
+                                            <i class="fa-solid fa-circle-exclamation mr-1"></i> Ingrese un correo válido.
+                                        </p>
                                         <input type="text" name="email_address_check" value="" class="hidden" tabindex="-1">
                                         <input type="hidden" name="locale" value="es">
                                     </form>
@@ -309,16 +333,18 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
 
+        <!-- ========================================== -->
+        <!-- WIDGET DEPORTIVO -->
+        <!-- ========================================== -->
         <div class="flex justify-center w-full mt-[32px] mb-[56px] md:mt-[48px] md:mb-[80px] lg:mt-[64px] lg:mb-[96px]">
             <div class="sport-widget-bg selection:bg-black selection:text-white rounded-[16px] p-[16px] sm:p-[24px] w-full max-w-full relative overflow-hidden flex flex-col md:flex-row items-center md:items-start lg:items-center gap-[20px] sm:gap-[24px] md:gap-[16px] lg:gap-[36px] transition-all">
                 
                 <div class="relative z-10 w-full md:w-[25%] lg:w-[24%] flex justify-center md:justify-start selection:bg-transparent">
-                    <img src="https://corgax24.com/imag/logo/deportessinfondo.png" alt="CORGAX24 Deportes" 
+                    <img src="https://corgax24.com/imag/logo/deportessinfondo.png" alt="Logo Deportes" 
                          draggable="false" oncontextmenu="return false;"
                          class="max-w-full object-contain drop-shadow-xl select-none pointer-events-none
                          h-[190px] mt-[-35px] mb-[-40px]
@@ -332,46 +358,44 @@
                         <div class="flex items-start gap-[8px] sm:gap-[12px] px-[8px] border-l-[3px] border-black/30">
                             <i class="fa-solid fa-earth-americas text-[#111111] text-[18px] sm:text-[20px] md:text-[22px] mt-[2px]"></i>
                             <div class="flex flex-col text-left">
-                                <span class="text-white font-black uppercase tracking-wider leading-none mb-[4px] text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px]">Nacional / Int.</span>
-                                <span class="text-white/90 font-medium leading-tight text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px]">Cobertura sin fronteras</span>
+                                <span class="text-white font-black uppercase tracking-wider leading-none mb-[4px] text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] select-text">Nacional e Int.</span>
+                                <span class="text-white/90 font-medium leading-tight text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px] select-text">Cobertura sin fronteras</span>
                             </div>
                         </div>
                         <div class="flex items-start gap-[8px] sm:gap-[12px] px-[8px] border-l-[3px] border-black/30">
                             <i class="fa-solid fa-futbol text-[#111111] text-[18px] sm:text-[20px] md:text-[22px] mt-[2px]"></i>
                             <div class="flex flex-col text-left">
-                                <span class="text-white font-black uppercase tracking-wider leading-none mb-[4px] text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px]">Fútbol</span>
-                                <span class="text-white/90 font-medium leading-tight text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px]">Análisis y resultados</span>
+                                <span class="text-white font-black uppercase tracking-wider leading-none mb-[4px] text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] select-text">Fútbol</span>
+                                <span class="text-white/90 font-medium leading-tight text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px] select-text">Análisis y mercado</span>
                             </div>
                         </div>
                         <div class="flex items-start gap-[8px] sm:gap-[12px] px-[8px] border-l-[3px] border-black/30">
                             <i class="fa-solid fa-trophy text-[#111111] text-[18px] sm:text-[20px] md:text-[22px] mt-[2px]"></i>
                             <div class="flex flex-col text-left">
-                                <span class="text-white font-black uppercase tracking-wider leading-none mb-[4px] text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px]">Torneos</span>
-                                <span class="text-white/90 font-medium leading-tight text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px]">Sigue cada jornada</span>
+                                <span class="text-white font-black uppercase tracking-wider leading-none mb-[4px] text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] select-text">Torneos</span>
+                                <span class="text-white/90 font-medium leading-tight text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px] select-text">Sigue cada jornada</span>
                             </div>
                         </div>
                         <div class="flex items-start gap-[8px] sm:gap-[12px] px-[8px] border-l-[3px] border-black/30">
                             <i class="fa-solid fa-chart-simple text-[#111111] text-[18px] sm:text-[20px] md:text-[22px] mt-[2px]"></i>
                             <div class="flex flex-col text-left">
-                                <span class="text-white font-black uppercase tracking-wider leading-none mb-[4px] text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px]">El Dato</span>
-                                <span class="text-white/90 font-medium leading-tight text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px]">Tablas y estadísticas</span>
+                                <span class="text-white font-black uppercase tracking-wider leading-none mb-[4px] text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] select-text">El Dato</span>
+                                <span class="text-white/90 font-medium leading-tight text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px] select-text">Tablas y estadísticas</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="relative z-10 w-full md:w-[30%] lg:w-[30%] pt-[16px] md:pt-[12px] lg:pt-[0px] border-t md:border-t-0 md:border-l border-black/20 flex flex-col items-center md:items-start lg:items-start md:pl-[20px] lg:pl-[24px]">
-                    
-                    <span class="text-[11px] sm:text-[12px] md:text-[13px] font-bold tracking-widest uppercase text-black/80 mb-[12px] lg:mb-[16px]">Canales de Difusión</span>
+                    <span class="text-[11px] sm:text-[12px] md:text-[13px] font-bold tracking-widest uppercase text-black/80 mb-[12px] lg:mb-[16px]">Síguenos en</span>
                     
                     <div class="flex flex-row xs:flex-col md:flex-col lg:flex-col justify-center xs:items-center md:justify-start items-center md:items-start gap-[12px] sm:gap-[16px] md:gap-[16px] w-full">
-                        
                         <a href="https://facebook.com" target="_blank" class="group flex items-center justify-start gap-[6px] sm:gap-[10px] transition-opacity hover:opacity-100">
                             <div class="w-[24px] sm:w-[28px] flex justify-center items-center flex-shrink-0">
                                 <i class="fa-brands fa-facebook text-[#E5E7EB] group-hover:text-white text-[20px] sm:text-[22px] md:text-[24px] drop-shadow-sm group-hover:scale-110 transition-transform"></i>
                             </div>
                             <div class="flex items-center text-left leading-tight font-black text-[#E5E7EB] group-hover:text-white text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] transition-colors">
-                                <span class="whitespace-nowrap">CORGAX24 Deportes</span>
+                                <span class="whitespace-nowrap">Corgax24 Deportes</span>
                             </div>
                         </a>
                         
@@ -379,43 +403,44 @@
                             <div class="w-[24px] sm:w-[28px] flex justify-center items-center flex-shrink-0">
                                 <i class="fa-brands fa-facebook text-[#E5E7EB] group-hover:text-white text-[20px] sm:text-[22px] md:text-[24px] drop-shadow-sm group-hover:scale-110 transition-transform"></i>
                             </div>
-                            <div class="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center text-left leading-tight font-black text-[#E5E7EB] group-hover:text-white text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] transition-colors">
-                                <span class="whitespace-nowrap sm:mr-[4px]">CORGAX24 Deportes</span>
-                                <span>Peru</span>
+                            <div class="flex flex-wrap md:flex-col lg:flex-row items-center md:items-start lg:items-center text-left leading-tight font-black text-[#E5E7EB] group-hover:text-white text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] transition-colors">
+                                <span class="whitespace-nowrap mr-[4px] md:mr-0 lg:mr-[4px]">Corgax24 Deportes</span>
+                                <span>Perú</span>
                             </div>
                         </a>
-
                     </div>
                 </div>
 
             </div>
         </div>
 
+        <!-- Atributos Inferiores -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-[16px] sm:gap-[24px] pt-[12px] border-t border-white/20 relative z-10 mb-[24px]">
             <div class="flex items-center gap-[12px] bg-black/20 p-[12px] rounded-[12px] backdrop-blur-sm border border-white/10">
                 <i class="fa-solid fa-clock-rotate-left text-white text-[20px] md:text-[24px]"></i>
-                <p class="font-medium leading-snug text-white/80 text-[10px] sm:text-[12px] md:text-[14px]">Información al<br>instante.</p>
+                <p class="font-medium leading-snug text-white/80 text-[10px] sm:text-[12px] md:text-[14px] select-text">Información al<br>instante.</p>
             </div>
             <div class="flex items-center gap-[12px] bg-black/20 p-[12px] rounded-[12px] backdrop-blur-sm border border-white/10">
                 <i class="fa-solid fa-shield-halved text-white text-[20px] md:text-[24px]"></i>
-                <p class="font-medium leading-snug text-white/80 text-[10px] sm:text-[12px] md:text-[14px]">Fuentes confiables<br>y verificadas.</p>
+                <p class="font-medium leading-snug text-white/80 text-[10px] sm:text-[12px] md:text-[14px] select-text">Fuentes confiables<br>y verificadas.</p>
             </div>
             <div class="flex items-center gap-[12px] bg-black/20 p-[12px] rounded-[12px] backdrop-blur-sm border border-white/10">
                 <i class="fa-solid fa-bolt text-white text-[20px] md:text-[24px]"></i>
-                <p class="font-medium leading-snug text-white/80 text-[10px] sm:text-[12px] md:text-[14px]">Cobertura en<br>tiempo real.</p>
+                <p class="font-medium leading-snug text-white/80 text-[10px] sm:text-[12px] md:text-[14px] select-text">Cobertura en<br>tiempo real.</p>
             </div>
             <div class="flex items-center gap-[12px] bg-black/20 p-[12px] rounded-[12px] backdrop-blur-sm border border-white/10">
                 <i class="fa-solid fa-network-wired text-white text-[20px] md:text-[24px]"></i>
-                <p class="font-medium leading-snug text-white/80 text-[10px] sm:text-[12px] md:text-[14px]">Conectando las<br>noticias globales.</p>
+                <p class="font-medium leading-snug text-white/80 text-[10px] sm:text-[12px] md:text-[14px] select-text">Conectando las<br>noticias globales.</p>
             </div>
         </div>
 
+        <!-- FOOTER -->
         <div class="w-full pb-[24px] pt-[16px] mt-auto border-t border-white/10 flex flex-col md:flex-row items-center justify-center gap-[16px] sm:gap-[24px] text-white/70 relative z-10">
             <span class="text-[12px] font-bold tracking-widest uppercase text-white/80">Un proyecto de</span>
             
             <div class="flex items-center gap-[32px] selection:bg-transparent">
-                <a href="https://corgax.com" target="_blank" class="flex items-center justify-center outline-none" title="Visitar CORGAX">
-                    <img src="https://corgax.com/imag/logo/corgaxsinfondo.png" alt="CORGAX" 
+                <a href="https://corgax.com" target="_blank" class="flex items-center justify-center outline-none" title="Visitar Corgax">
+                    <img src="https://corgax.com/imag/logo/corgaxsinfondo.png" alt="Corgax" 
                          draggable="false" oncontextmenu="return false;"
                          class="footer-logo w-auto object-contain cursor-pointer select-none
                          h-[96px] mt-[0px] mb-[0px]
@@ -437,50 +462,81 @@
                 </a>
             </div>
         </div>
-
     </div>
 
+    <!-- SCRIPT DE CONTROL VISUAL (Brevo Form) -->
     <script>
+        const form = document.getElementById('sib-form');
+        const emailInput = document.getElementById('EMAIL');
+        const errorAlert = document.getElementById('error-alert');
+        const successMessage = document.getElementById('success-message');
+        const formContainer = document.getElementById('form-container');
+        const widgetHeader = document.getElementById('widget-header');
+        const btnText = document.getElementById('btn-text');
+        const btnLoader = document.getElementById('btn-loader');
+        const submitBtn = document.getElementById('submit-btn');
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        form.addEventListener('submit', function(e) {
+            const emailValue = emailInput.value.trim();
+
+            if (!isValidEmail(emailValue)) {
+                e.preventDefault(); 
+                errorAlert.classList.remove('hidden');
+                emailInput.classList.add('border-red-400');
+                
+                emailInput.style.transform = 'translateX(5px)';
+                setTimeout(() => emailInput.style.transform = 'translateX(-5px)', 100);
+                setTimeout(() => emailInput.style.transform = 'translateX(0)', 200);
+                return;
+            }
+
+            errorAlert.classList.add('hidden');
+            emailInput.classList.remove('border-red-400');
+
+            btnText.textContent = "Enviando...";
+            btnLoader.classList.remove('hidden');
+            
+            setTimeout(() => {
+                emailInput.disabled = true;
+                submitBtn.disabled = true;
+            }, 50);
+
+            setTimeout(() => {
+                formContainer.style.opacity = '0';
+                widgetHeader.style.opacity = '0';
+                
+                setTimeout(() => {
+                    formContainer.style.display = 'none';
+                    widgetHeader.style.display = 'none';
+                    successMessage.classList.remove('hidden');
+                }, 300);
+            }, 1200);
+        });
+
+        emailInput.addEventListener('input', function() {
+            errorAlert.classList.add('hidden');
+            emailInput.classList.remove('border-red-400');
+        });
+
+        // Limpieza de copia
         document.addEventListener('copy', function(e) {
             const selection = window.getSelection();
             if (!selection.rangeCount) return;
-
             const tempDiv = document.createElement('div');
             for (let i = 0; i < selection.rangeCount; i++) {
                 tempDiv.appendChild(selection.getRangeAt(i).cloneContents());
             }
-
             const images = tempDiv.querySelectorAll('img');
             images.forEach(img => img.remove());
-
             e.clipboardData.setData('text/html', tempDiv.innerHTML);
             e.clipboardData.setData('text/plain', tempDiv.innerText);
             e.preventDefault();
         });
     </script>
-
-    <!-- Script de configuración de Brevo adaptado a español neutro -->
-    <script>
-        window.REQUIRED_CODE_ERROR_MESSAGE = 'Elige un código de país';
-        window.LOCALE = 'es';
-        window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "La información no es válida. Comprueba el correo.";
-        window.REQUIRED_ERROR_MESSAGE = "Este campo es obligatorio.";
-        window.GENERIC_INVALID_MESSAGE = "La información proporcionada no es válida.";
-        window.INVALID_NUMBER = "El número no es válido.";
-        window.INVALID_DATE = "Introduce una fecha válida";
-        window.REQUIRED_MULTISELECT_MESSAGE = 'Selecciona al menos una opción';
-        window.translation = {
-            common: {
-                selectedList: '{quantity} lista seleccionada',
-                selectedLists: '{quantity} listas seleccionadas',
-                selectedOption: '{quantity} seleccionado',
-                selectedOptions: '{quantity} seleccionados',
-            }
-        };
-        var AUTOHIDE = Boolean(0);
-    </script>
-    <!-- Script principal de Brevo que hace que todo sea dinámico (Ajax) -->
-    <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-
 </body>
 </html>
