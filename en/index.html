@@ -12,9 +12,36 @@
     <meta name="google" content="notranslate">
     <link rel="canonical" href="https://corgax24.com/en/">
     
-    <!-- Favicon (El apple-touch-icon fuerza bordes redondeados al guardar en móviles) -->
+    <!-- Ultra-light Static Cache (No Cookies) for instant reloading -->
+    <meta http-equiv="Cache-Control" content="public, max-age=604800, immutable">
+    <link rel="preconnect" href="https://corgax24.com" crossorigin>
+    <link rel="preload" as="image" href="https://corgax24.com/imag/logo/newssinfondo.png">
+
+    <!-- Favicon script to force a 100% circular design across all browsers -->
     <link rel="icon" href="https://corgax24.com/imag/logo/favicon/C24.png" type="image/png">
-    <link rel="apple-touch-icon" href="https://corgax24.com/imag/logo/favicon/C24.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://corgax24.com/imag/logo/favicon/C24.png">
+    <meta name="theme-color" content="#D31224">
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            try {
+                const link = document.querySelector("link[rel='icon']");
+                const img = new Image();
+                img.crossOrigin = "Anonymous";
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 128; canvas.height = 128;
+                    const ctx = canvas.getContext('2d');
+                    ctx.beginPath();
+                    ctx.arc(64, 64, 64, 0, Math.PI * 2, true);
+                    ctx.clip(); // Circular mask
+                    ctx.drawImage(img, 0, 0, 128, 128);
+                    link.href = canvas.toDataURL("image/png");
+                };
+                img.src = link.href;
+            } catch(e) {}
+        });
+    </script>
 
     <!-- Espacio para Google Analytics -->
     <!-- 
@@ -237,10 +264,14 @@
                         <div class="w-[48px] h-[48px] flex-shrink-0 flex items-center justify-center border border-white/20 rounded-[12px] bg-black/20 shadow-sm backdrop-blur-sm">
                             <i class="fa-regular fa-clock text-white text-[20px] md:text-[22px]"></i>
                         </div>
-                        <p class="leading-tight font-bold tracking-wide text-white text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] select-text">
-                            UPCOMING LAUNCH.<br>
-                            <span class="text-black bg-white px-[6px] py-[2px] rounded-[4px] text-[10px] sm:text-[11px] uppercase mt-[4px] inline-block shadow-sm">COMING SOON</span>
-                        </p>
+                        <div class="flex flex-col items-start justify-center">
+                            <span class="leading-tight font-bold tracking-wide text-white text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] select-text whitespace-nowrap">
+                                UPCOMING LAUNCH.
+                            </span>
+                            <span class="text-black bg-white px-[6px] py-[2px] rounded-[4px] text-[10px] sm:text-[11px] uppercase mt-[4px] inline-block shadow-sm">
+                                COMING SOON
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
